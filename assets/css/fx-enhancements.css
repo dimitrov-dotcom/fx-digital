@@ -1,0 +1,404 @@
+:root {
+  --fx-bg: #0b1120;
+  --fx-surface: #111827;
+  --fx-card: #172033;
+  --fx-card-hover: #202c42;
+  --fx-text: #f8fafc;
+  --fx-description: #cbd5e1;
+  --fx-muted: #94a3b8;
+  --fx-purple: #a78bfa;
+  --fx-blue: #60a5fa;
+  --fx-border: #334155;
+  --fx-gradient: linear-gradient(135deg, #7c3aed, #2563eb);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--fx-bg) !important;
+  color: var(--fx-text) !important;
+}
+
+body, button, input, textarea, select {
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title {
+  color: var(--fx-text) !important;
+}
+
+p, li, label, .description, .subtitle {
+  color: var(--fx-description);
+}
+
+small, .muted {
+  color: var(--fx-muted);
+}
+
+a {
+  transition: color .2s ease;
+}
+
+a:hover {
+  color: var(--fx-purple);
+}
+
+header, .navbar, nav.navbar, .site-header, .main-header {
+  background: rgba(17, 24, 39, .96) !important;
+  color: var(--fx-text) !important;
+  border-bottom: 1px solid var(--fx-border);
+  backdrop-filter: blur(14px);
+}
+
+header a, .navbar a, nav.navbar a,
+.site-header a, .main-header a {
+  color: var(--fx-description);
+}
+
+.card, .service-card, .feature-card,
+.service-box, .info-card, .contact-card {
+  background: var(--fx-card) !important;
+  color: var(--fx-description) !important;
+  border: 1px solid var(--fx-border) !important;
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  transition: transform .25s ease, border-color .25s ease,
+              box-shadow .25s ease, background .25s ease;
+}
+
+.card h1, .card h2, .card h3, .card h4,
+.service-card h1, .service-card h2,
+.service-card h3, .service-card h4,
+.feature-card h1, .feature-card h2,
+.feature-card h3, .feature-card h4 {
+  color: var(--fx-text) !important;
+}
+
+.card p, .service-card p, .feature-card p {
+  color: var(--fx-description) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover, .service-card:hover, .feature-card:hover,
+  .service-box:hover, .info-card:hover {
+    transform: translateY(-5px);
+    background: var(--fx-card-hover) !important;
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 16px 34px rgba(124,58,237,.16);
+  }
+}
+
+.btn-primary, .button-primary, a.btn-primary,
+a.button-primary, button.primary {
+  background: var(--fx-gradient) !important;
+  color: #fff !important;
+  border: 1px solid transparent !important;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover, .button-primary:hover,
+  a.btn-primary:hover, a.button-primary:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(124,58,237,.25);
+  }
+}
+
+input, textarea, select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  background: #0b1120 !important;
+  color: var(--fx-text) !important;
+  border: 1px solid #475569 !important;
+  border-radius: 10px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--fx-muted) !important;
+}
+
+input:focus, textarea:focus, select:focus,
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--fx-purple);
+  outline-offset: 3px;
+}
+
+.fx-enhancement-section {
+  width: min(1100px, calc(100% - 36px));
+  margin: 64px auto;
+  color: var(--fx-text);
+}
+
+.fx-enhancement-section h2 {
+  margin-bottom: 12px;
+  font-size: clamp(24px, 4vw, 36px);
+}
+
+.fx-enhancement-intro {
+  max-width: 720px;
+  line-height: 1.8;
+  color: var(--fx-description);
+}
+
+.fx-enhancement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.fx-enhancement-card {
+  min-width: 0;
+  padding: 22px;
+  background: var(--fx-card);
+  border: 1px solid var(--fx-border);
+  border-radius: 16px;
+  color: var(--fx-description);
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.fx-enhancement-card h3 {
+  margin-top: 10px;
+  color: var(--fx-text);
+}
+
+.fx-enhancement-card p {
+  line-height: 1.7;
+}
+
+.fx-enhancement-icon {
+  font-size: 30px;
+}
+
+.fx-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.fx-reveal.fx-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fx-wa-floating {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9990;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 19px;
+  border-radius: 999px;
+  background: #16a34a;
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 8px 28px rgba(22,163,74,.3);
+  transition: transform .2s ease, filter .2s ease;
+}
+
+.fx-wa-floating:hover {
+  color: #fff !important;
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+}
+
+.fx-order-button {
+  display: inline-block;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--fx-gradient);
+  color: white !important;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fx-faq-item {
+  margin: 12px 0;
+  border: 1px solid var(--fx-border);
+  border-radius: 12px;
+  background: var(--fx-card);
+  overflow: hidden;
+}
+
+.fx-faq-item summary {
+  padding: 17px;
+  color: var(--fx-text);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.fx-faq-answer {
+  padding: 0 17px 17px;
+  color: var(--fx-description);
+  line-height: 1.8;
+}
+
+.fx-order-dialog {
+  width: min(520px, calc(100% - 32px));
+  max-height: 85vh;
+  overflow: auto;
+  background: #111827;
+  color: var(--fx-text);
+  border: 1px solid var(--fx-border);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.fx-order-dialog::backdrop {
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(4px);
+}
+
+.fx-order-dialog h2 {
+  color: var(--fx-text);
+}
+
+.fx-order-form {
+  display: grid;
+  gap: 14px;
+}
+
+.fx-order-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--fx-description);
+}
+
+.fx-order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fx-order-close {
+  background: #273449;
+  color: white;
+  border: 1px solid var(--fx-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.fx-portfolio-note {
+  color: var(--fx-muted) !important;
+  font-size: 13px;
+}
+
+.fx-footer-note {
+  color: var(--fx-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.fx-side-menu {
+  background: #111827 !important;
+  color: var(--fx-text) !important;
+}
+
+.fx-menu-links a {
+  color: var(--fx-description) !important;
+}
+
+.fx-menu-links a:hover {
+  background: #273449 !important;
+  color: white !important;
+}
+
+.fx-menu-button {
+  background: var(--fx-gradient) !important;
+  color: white !important;
+}
+
+.fx-menu-brand {
+  color: var(--fx-purple) !important;
+}
+
+.fx-menu-close {
+  background: #273449 !important;
+  color: white !important;
+}
+
+@media (max-width: 760px) {
+  .fx-enhancement-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fx-enhancement-section {
+    margin: 44px auto;
+  }
+
+  .fx-wa-floating {
+    right: 14px;
+    bottom: 14px;
+    padding: 13px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fx-enhancement-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fx-wa-floating {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+
+  .fx-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* Tombol WhatsApp mengambang: ikon saja */
+.fx-wa-floating {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  color: #fff;
+  background: #25D366;
+}
+.fx-wa-floating:hover {
+  background: #1ebe5d;
+}
+.fx-wa-floating svg {
+  display: block;
+  flex-shrink: 0;
+}
+.fx-wa-floating span {
+  display: none !important;
+}
+@media (max-width: 600px) {
+  .fx-wa-floating {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+  }
+}
