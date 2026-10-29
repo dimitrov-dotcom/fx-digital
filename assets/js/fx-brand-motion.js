@@ -304,3 +304,327 @@
   launchMeteor();
   window.setInterval(launchMeteor, 3000);
 })();
+
+
+/* ===== FX COSMIC BLACK HOLE CONTROLLER ===== */
+(function () {
+  function initCosmicBlackHole() {
+    const scene = document.getElementById("fx-cosmos-scene");
+    if (!scene || scene.querySelector(".fx-blackhole")) return;
+
+    const hole = document.createElement("button");
+    hole.type = "button";
+    hole.className = "fx-blackhole";
+    hole.setAttribute("aria-label", "Arahkan kursor untuk menyedot Bumi dan Saturnus");
+    hole.innerHTML =
+      '<span class="fx-bh-ring"></span>' +
+      '<span class="fx-bh-ring-inner"></span>' +
+      '<span class="fx-bh-core"></span>';
+
+    scene.appendChild(hole);
+
+    let showTimer = null;
+    let hideTimer = null;
+    let nextTimer = null;
+    let active = false;
+    let absorbing = false;
+
+    function restorePlanets(planets) {
+      planets.forEach(function (planet) {
+        planet.classList.remove("fx-bh-absorbing");
+        planet.style.removeProperty("--fx-bh-dx");
+        planet.style.removeProperty("--fx-bh-dy");
+      });
+    }
+
+    function hideHole() {
+      active = false;
+      hole.classList.remove("fx-bh-visible");
+      hole.disabled = true;
+      scene.classList.remove("fx-bh-light-drain");
+    }
+
+    function scheduleNext() {
+      clearTimeout(nextTimer);
+      nextTimer = setTimeout(showHole, 30000);
+    }
+
+    function showHole() {
+      if (!scene.isConnected) return;
+
+      const planets = Array.from(
+        scene.querySelectorAll(".fx-space-planet")
+      );
+
+      if (planets.length < 2) {
+        scheduleNext();
+        return;
+      }
+
+      // Posisi acak di area background, tidak menempel di tepi layar.
+      const maxX = Math.max(0, scene.clientWidth - 100);
+      const maxY = Math.max(0, scene.clientHeight - 100);
+      hole.style.left = Math.round(10 + Math.random() * Math.max(0, maxX - 20)) + "px";
+      hole.style.top = Math.round(10 + Math.random() * Math.max(0, maxY - 20)) + "px";
+      scene.style.setProperty(
+        "--fx-bh-x",
+        (parseFloat(hole.style.left) + hole.offsetWidth / 2) + "px"
+      );
+      scene.style.setProperty(
+        "--fx-bh-y",
+        (parseFloat(hole.style.top) + hole.offsetHeight / 2) + "px"
+      );
+      scene.classList.add("fx-bh-light-drain");
+
+      absorbing = false;
+      active = true;
+      hole.disabled = false;
+      hole.classList.remove("fx-bh-visible");
+      void hole.offsetWidth;
+      hole.classList.add("fx-bh-visible");
+
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(function () {
+        hideHole();
+        scheduleNext();
+      }, 9000);
+    }
+
+    hole.addEventListener("mouseenter", function () {
+      if (!active || absorbing) return;
+
+      const planets = Array.from(
+        scene.querySelectorAll(".fx-space-planet")
+      );
+
+      if (planets.length < 2) return;
+
+      absorbing = true;
+      hole.disabled = true;
+      scene.classList.remove("fx-bh-ufo-return");
+      scene.classList.add("fx-bh-ufo-panic");
+
+      const holeRect = hole.getBoundingClientRect();
+      const targetX = holeRect.left + holeRect.width / 2;
+      const targetY = holeRect.top + holeRect.height / 2;
+
+      planets.forEach(function (planet) {
+        const rect = planet.getBoundingClientRect();
+        const planetX = rect.left + rect.width / 2;
+        const planetY = rect.top + rect.height / 2;
+
+        planet.style.setProperty("--fx-bh-dx", (targetX - planetX) + "px");
+        planet.style.setProperty("--fx-bh-dy", (targetY - planetY) + "px");
+      });
+
+      requestAnimationFrame(function () {
+        planets.forEach(function (planet) {
+          planet.classList.add("fx-bh-absorbing");
+        });
+      });
+
+      // Setelah 7 detik tersedot, tukar posisi Bumi dan Saturnus.
+      clearTimeout(showTimer);
+      showTimer = setTimeout(function () {
+        if (planets.length >= 2) {
+          const earth = planets.find(function (planet) {
+            return planet.classList.contains("fx-earth-planet");
+          });
+          const saturn = planets.find(function (planet) {
+            return !planet.classList.contains("fx-earth-planet");
+          });
+
+          if (earth && saturn) {
+            const earthLeft = earth.style.left;
+            const earthTop = earth.style.top;
+            const saturnLeft = saturn.style.left;
+            const saturnTop = saturn.style.top;
+
+            earth.style.left = saturnLeft;
+            earth.style.top = saturnTop;
+            saturn.style.left = earthLeft;
+            saturn.style.top = earthTop;
+          }
+        }
+
+        // Kedua planet tetap menghilang selama 7 detik.
+        showTimer = setTimeout(function () {
+          restorePlanets(planets);
+          scene.classList.remove("fx-bh-ufo-panic");
+          scene.classList.add("fx-bh-ufo-return");
+
+          // Hitung posisi Bumi yang sebenarnya setelah planet muncul.
+          const ufo = scene.querySelector(".fx-space-ufo");
+          const earth = scene.querySelector(".fx-earth-planet");
+
+          if (ufo && earth) {
+            // Hentikan animasi lama yang bisa membuat UFO transparan
+            // atau mengarahkan UFO ke posisi yang salah.
+            ufo.style.setProperty("animation", "none", "important");
+            ufo.style.display = "block";
+            ufo.style.opacity = "1";
+            ufo.style.visibility = "visible";
+
+            const saturn = Array.from(
+              scene.querySelectorAll(".fx-space-planet")
+            ).find(function (planet) {
+              return !planet.classList.contains("fx-earth-planet");
+            });
+
+            if (!saturn) {
+              scene.classList.remove("fx-bh-ufo-return");
+              return;
+            }
+
+            // Hitung ulang lintasan dari Saturnus dan Bumi setelah bertukar.
+            const sceneRect = scene.getBoundingClientRect();
+            const ufoRect = ufo.getBoundingClientRect();
+            const saturnRect = saturn.getBoundingClientRect();
+            const earthRect = earth.getBoundingClientRect();
+
+            const startX = saturnRect.left - sceneRect.left +
+                           saturnRect.width / 2 - ufoRect.width / 2;
+            const startY = saturnRect.top - sceneRect.top +
+                           saturnRect.height / 2 - ufoRect.height / 2;
+            const endX = earthRect.left - sceneRect.left +
+                         earthRect.width / 2 - ufoRect.width / 2;
+            const endY = earthRect.top - sceneRect.top +
+                         earthRect.height / 2 - ufoRect.height / 2;
+
+            ufo.style.left = startX + "px";
+            ufo.style.top = startY + "px";
+            ufo.style.transform = "rotate(0deg) scale(1)";
+
+            const startTime = performance.now();
+            const duration = 5000;
+
+            function flyToEarth(now) {
+              const progress = Math.min(1, (now - startTime) / duration);
+              const eased = progress * progress * (3 - 2 * progress);
+              const curve = Math.sin(progress * Math.PI) * 65;
+
+              ufo.style.left =
+                (startX + (endX - startX) * eased) + "px";
+              ufo.style.top =
+                (startY + (endY - startY) * eased - curve) + "px";
+              ufo.style.opacity = "1";
+              ufo.style.visibility = "visible";
+              ufo.style.transform =
+                "rotate(" + (Math.sin(progress * Math.PI * 2) * 12) +
+                "deg) scale(" + (1 - progress * 0.45) + ")";
+
+              if (progress < 1) {
+                requestAnimationFrame(flyToEarth);
+              } else {
+                scene.classList.remove("fx-bh-ufo-return");
+
+                // UFO tiba di Bumi dan bersiap mengulangi lintasan.
+                ufo.style.left = endX + "px";
+                ufo.style.top = endY + "px";
+                ufo.style.transform = "scale(.55)";
+                ufo.style.opacity = "1";
+                ufo.style.visibility = "visible";
+                ufo.style.display = "block";
+
+                function repeatSaturnToEarth() {
+                  if (!scene.isConnected || !ufo.isConnected) return;
+
+                  // Tunda penerbangan normal selama Black Hole aktif.
+                  if (scene.classList.contains("fx-bh-ufo-panic")) {
+                    setTimeout(repeatSaturnToEarth, 1000);
+                    return;
+                  }
+
+                  const currentEarth = scene.querySelector(".fx-earth-planet");
+                  const currentSaturn = Array.from(
+                    scene.querySelectorAll(".fx-space-planet")
+                  ).find(function (planet) {
+                    return !planet.classList.contains("fx-earth-planet");
+                  });
+
+                  if (!currentEarth || !currentSaturn) {
+                    setTimeout(repeatSaturnToEarth, 1000);
+                    return;
+                  }
+
+                  const rectScene = scene.getBoundingClientRect();
+                  const rectSaturn = currentSaturn.getBoundingClientRect();
+                  const rectEarth = currentEarth.getBoundingClientRect();
+
+                  const sx = rectSaturn.left - rectScene.left +
+                             rectSaturn.width / 2 - ufo.offsetWidth / 2;
+                  const sy = rectSaturn.top - rectScene.top +
+                             rectSaturn.height / 2 - ufo.offsetHeight / 2;
+                  const ex = rectEarth.left - rectScene.left +
+                             rectEarth.width / 2 - ufo.offsetWidth / 2;
+                  const ey = rectEarth.top - rectScene.top +
+                             rectEarth.height / 2 - ufo.offsetHeight / 2;
+
+                  ufo.style.setProperty("animation", "none", "important");
+                  ufo.style.left = sx + "px";
+                  ufo.style.top = sy + "px";
+                  ufo.style.opacity = "1";
+                  ufo.style.visibility = "visible";
+                  ufo.style.display = "block";
+
+                  const tripStart = performance.now();
+                  const tripDuration = 5000;
+
+                  function travel(now) {
+                    if (!scene.isConnected || !ufo.isConnected) return;
+
+                    if (scene.classList.contains("fx-bh-ufo-panic")) {
+                      setTimeout(repeatSaturnToEarth, 1000);
+                      return;
+                    }
+
+                    const t = Math.min(1, (now - tripStart) / tripDuration);
+                    const easedT = t * t * (3 - 2 * t);
+                    const arc = Math.sin(t * Math.PI) * 65;
+
+                    ufo.style.left = (sx + (ex - sx) * easedT) + "px";
+                    ufo.style.top = (sy + (ey - sy) * easedT - arc) + "px";
+                    ufo.style.opacity = "1";
+                    ufo.style.visibility = "visible";
+                    ufo.style.transform =
+                      "rotate(" + (Math.sin(t * Math.PI * 2) * 12) +
+                      "deg) scale(" + (0.8 - t * 0.25) + ")";
+
+                    if (t < 1) {
+                      requestAnimationFrame(travel);
+                    } else {
+                      ufo.style.left = ex + "px";
+                      ufo.style.top = ey + "px";
+                      ufo.style.transform = "scale(.55)";
+                      setTimeout(repeatSaturnToEarth, 1800);
+                    }
+                  }
+
+                  requestAnimationFrame(travel);
+                }
+
+                setTimeout(repeatSaturnToEarth, 1800);
+              }
+            }
+
+            requestAnimationFrame(flyToEarth);
+          } else {
+            scene.classList.remove("fx-bh-ufo-return");
+          }
+
+          hideHole();
+          scheduleNext();
+        }, 7000);
+      }, 7000);
+    });
+
+    // Kemunculan pertama dipercepat untuk pengujian.
+    nextTimer = setTimeout(showHole, 50000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCosmicBlackHole, { once: true });
+  } else {
+    initCosmicBlackHole();
+  }
+})();
