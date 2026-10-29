@@ -20,7 +20,8 @@
   const cards = document.querySelectorAll(
     ".hero-card, .card, .contact-card, " +
     ".fx-enhancement-card, .service-card, " +
-    ".feature-card, .project-card, .fx-modern-card"
+    ".feature-card, .project-card, .fx-modern-card, " +
+    ".fx-service-item"
   );
 
   cards.forEach(card => {
