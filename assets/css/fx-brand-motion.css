@@ -1485,11 +1485,9 @@ body::after {
     animation: none !important;
   }
 }\n\n
-/* Perbaikan: UFO tetap terlihat selama peristiwa Black Hole */
+/* Perbaikan: UFO tetap terlihat dan animasinya tetap berjalan */
 #fx-cosmos-scene.fx-bh-ufo-panic .fx-space-ufo,
 #fx-cosmos-scene.fx-bh-ufo-return .fx-space-ufo {
   display: block !important;
-  opacity: 1 !important;
   visibility: visible !important;
-  animation: none !important;
 }

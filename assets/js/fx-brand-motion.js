@@ -473,6 +473,8 @@
 
             if (!saturn) {
               scene.classList.remove("fx-bh-ufo-return");
+              hideHole();
+              scheduleNext();
               return;
             }
 
