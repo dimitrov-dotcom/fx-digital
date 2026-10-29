@@ -1288,3 +1288,208 @@ body::after {
     -1px -1px 4px rgba(255,239,195,.35),
     1px 2px 5px rgba(0,0,0,.35) !important;
 }
+
+
+/* ===== FX COSMIC BLACK HOLE ===== */
+#fx-cosmos-scene .fx-blackhole {
+  pointer-events: auto !important;
+  position: absolute;
+  z-index: 30;
+  width: 352px;
+  height: 352px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  scale: .65;
+  transition: opacity .25s ease, scale .3s ease, visibility .25s;
+  touch-action: manipulation;
+}
+
+#fx-cosmos-scene .fx-blackhole.fx-bh-visible {
+  opacity: 1;
+  visibility: visible;
+  scale: 1;
+}
+
+#fx-cosmos-scene .fx-bh-core {
+  position: absolute;
+  inset: 25px;
+  border-radius: 50%;
+  background: #020106;
+  box-shadow: 0 0 12px 5px #7c3aed,
+              0 0 25px 8px rgba(168,85,247,.55);
+}
+
+#fx-cosmos-scene .fx-bh-ring {
+  position: absolute;
+  inset: 14px 0;
+  border: 4px solid transparent;
+  border-top-color: #f0abfc;
+  border-bottom-color: #8b5cf6;
+  border-radius: 50%;
+  transform: rotate(-25deg) scaleY(.58);
+  box-shadow: 0 0 10px #a855f7;
+  animation: fxBhSpin 2s linear infinite;
+}
+
+#fx-cosmos-scene .fx-bh-ring-inner {
+  position: absolute;
+  inset: 20px 3px;
+  border: 3px solid transparent;
+  border-left-color: #67e8f9;
+  border-right-color: #c084fc;
+  border-radius: 50%;
+  transform: rotate(35deg) scaleY(.65);
+  animation: fxBhSpinReverse 2.7s linear infinite;
+}
+
+#fx-cosmos-scene .fx-blackhole:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 4px;
+}
+
+#fx-cosmos-scene .fx-space-planet.fx-bh-absorbing {
+  translate: var(--fx-bh-dx) var(--fx-bh-dy);
+  scale: .025;
+  opacity: 0 !important;
+  transition: translate 7s cubic-bezier(.5, 0, .9, .4),
+              scale 7s ease-in,
+              opacity 7s ease-in !important;
+}
+
+@keyframes fxBhSpin {
+  to { rotate: 335deg; }
+}
+
+@keyframes fxBhSpinReverse {
+  to { rotate: -325deg; }
+}
+
+@media (max-width: 600px) {
+  #fx-cosmos-scene .fx-blackhole {
+    width: 72px;
+    height: 72px;
+  }
+
+  #fx-cosmos-scene .fx-bh-core {
+    inset: 21px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #fx-cosmos-scene .fx-bh-ring,
+  #fx-cosmos-scene .fx-bh-ring-inner {
+    animation-duration: 8s;
+  }
+}
+
+
+/* ===== FX DIGITAL BLACK HOLE: LIGHT ABSORPTION ===== */
+
+#fx-cosmos-scene.fx-bh-light-drain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--fx-bh-x, 50%) var(--fx-bh-y, 50%),
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.48) 16%,
+    rgba(0, 0, 0, 0.28) 36%,
+    rgba(0, 0, 0, 0.08) 58%,
+    transparent 76%
+  );
+  animation: fxBHLightDrain 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes fxBHLightDrain {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#fx-cosmos-scene .fx-blackhole {
+  z-index: 30;
+}
+
+@media (max-width: 600px) {
+  #fx-cosmos-scene .fx-blackhole {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #fx-cosmos-scene.fx-bh-light-drain::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+/* BLACK HOLE: SELURUH BACKGROUND MEREDUP */
+#fx-cosmos-scene.fx-bh-light-drain::after {
+  background: rgba(0, 0, 0, 0.65) !important;
+  animation: fxBHLightDrain 2.2s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes fxBHLightDrain {
+  from { opacity: 0.45; }
+  to { opacity: 1; }
+}
+
+
+/* ===== FX UFO PANIK KETIKA BLACK HOLE AKTIF ===== */
+#fx-cosmos-scene.fx-bh-ufo-panic .fx-space-ufo {
+  animation: fxUfoPanic 3.2s ease-in-out infinite !important;
+  transform-origin: center;
+  z-index: 20;
+}
+
+@keyframes fxUfoPanic {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  12%  { transform: translate(45px, -32px) rotate(24deg) scale(1.08); }
+  25%  { transform: translate(-55px, 28px) rotate(-35deg) scale(.92); }
+  39%  { transform: translate(25px, 58px) rotate(48deg) scale(1.12); }
+  53%  { transform: translate(-70px, -18px) rotate(-48deg) scale(.9); }
+  68%  { transform: translate(48px, -48px) rotate(32deg) scale(1.05); }
+  83%  { transform: translate(-25px, 35px) rotate(-25deg) scale(.96); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+/* UFO kembali menuju Bumi setelah planet muncul */
+#fx-cosmos-scene.fx-bh-ufo-return .fx-space-ufo {
+  animation: fxUfoReturn 5s ease-in-out forwards !important;
+  z-index: 20;
+}
+
+@keyframes fxUfoReturn {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(.8); }
+  35%  { transform: translate(-35px, -25px) rotate(-18deg) scale(1); }
+  70%  { transform: translate(25px, 12px) rotate(12deg) scale(.85); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #fx-cosmos-scene.fx-bh-ufo-panic .fx-space-ufo,
+  #fx-cosmos-scene.fx-bh-ufo-return .fx-space-ufo {
+    animation: none !important;
+  }
+}\n\n
+/* Perbaikan: UFO tetap terlihat selama peristiwa Black Hole */
+#fx-cosmos-scene.fx-bh-ufo-panic .fx-space-ufo,
+#fx-cosmos-scene.fx-bh-ufo-return .fx-space-ufo {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+}
