@@ -1,0 +1,93 @@
+/* FX DIGITAL - NEON NAVBAR */
+
+.navlinks a[data-nav] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--muted);
+  background: transparent;
+  text-decoration: none;
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+/* Efek hover */
+.navlinks a[data-nav]:hover {
+  color: #ffffff !important;
+  background: rgba(112, 72, 255, 0.12) !important;
+  border-color: rgba(133, 111, 255, 0.75) !important;
+  box-shadow:
+    0 0 7px rgba(112, 72, 255, 0.32),
+    inset 0 0 8px rgba(112, 72, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Kotak neon halaman aktif */
+.navlinks a[data-nav].active {
+  color: #ffffff !important;
+  background: linear-gradient(
+    135deg,
+    rgba(104, 63, 255, 0.22),
+    rgba(0, 210, 255, 0.10)
+  ) !important;
+  border: 1px solid #9277ff !important;
+  box-shadow:
+    0 0 6px rgba(126, 91, 255, 0.65),
+    0 0 16px rgba(126, 91, 255, 0.28),
+    inset 0 0 9px rgba(0, 210, 255, 0.08);
+}
+
+/* Garis neon di bawah menu aktif */
+.navlinks a[data-nav].active::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #a78bfa, #67e8f9);
+  box-shadow: 0 0 8px rgba(103, 232, 249, 0.75);
+}
+
+/* Fokus keyboard */
+.navlinks a[data-nav]:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+
+/* Tampilan mobile */
+@media (max-width: 850px) {
+  .navlinks a[data-nav] {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    padding: 12px 14px;
+  }
+
+  .navlinks a[data-nav].active::after {
+    left: auto;
+    right: 12px;
+    bottom: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateY(50%);
+  }
+}
+
+/* Kurangi animasi jika diminta oleh sistem pengguna */
+@media (prefers-reduced-motion: reduce) {
+  .navlinks a[data-nav] {
+    transition: none;
+    transform: none;
+  }
+}
