@@ -135,7 +135,40 @@ document.addEventListener("DOMContentLoaded", () => {
       button.focus();
     }
 
-    button.addEventListener("click", openMenu);
+    // Hover otomatis hanya untuk perangkat dengan mouse.
+    // Sentuhan dan klik tetap memakai perilaku menu yang sudah ada.
+    const desktopHover = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    );
+
+    function openMenuOnHover() {
+      if (!desktopHover.matches || menu.classList.contains("open")) return;
+
+      menu.classList.add("open");
+      button.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenuOnHover() {
+      if (!desktopHover.matches || !menu.classList.contains("open")) return;
+
+      menu.classList.remove("open");
+      overlay.classList.remove("open");
+      button.setAttribute("aria-expanded", "false");
+    }
+
+    button.addEventListener("pointerenter", openMenuOnHover);
+
+    menu.addEventListener("pointerleave", closeMenuOnHover);
+
+    // Klik tetap mendukung penggunaan manual dan perangkat sentuh.
+    button.addEventListener("click", () => {
+      if (menu.classList.contains("open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
     menu.querySelector(".fx-menu-close").addEventListener("click", closeMenu);
     overlay.addEventListener("click", closeMenu);
 
