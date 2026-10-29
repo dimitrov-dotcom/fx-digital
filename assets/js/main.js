@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { icon: "📝", name: "FX Docs", url: "fx-docs.html" },
       { icon: "🛠️", name: "FX Tech", url: "fx-tech.html" },
       { icon: "🎮", name: "FX Gaming", url: "fx-gaming.html" },
-      { icon: "📞", name: "Kontak & Maps", url: "kontak.html" }
+      { icon: "📞", name: "Kontak", url: "kontak.html" }
     ];
 
     const button = document.createElement("button");
