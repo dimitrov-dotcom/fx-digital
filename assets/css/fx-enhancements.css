@@ -402,3 +402,302 @@ button:focus-visible, a:focus-visible {
     min-width: 52px;
   }
 }
+
+
+/* Harga pada kartu layanan FX Digital */
+.fx-service-price {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border, rgba(128, 128, 128, 0.25));
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.fx-service-price strong {
+  font-weight: 700;
+}
+
+/* =================================
+   FX DIGITAL - SERVICE PACKAGES
+================================= */
+
+.fx-has-packages {
+  display: flex;
+  flex-direction: column;
+}
+
+.fx-package-area {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.fx-package-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f5a623, #ffcf66);
+  color: #241700;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform .2s ease, filter .2s ease;
+}
+
+.fx-package-toggle:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+}
+
+.fx-package-arrow {
+  font-size: 21px;
+}
+
+.fx-package-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.fx-package-panel[hidden] {
+  display: none;
+}
+
+.fx-package-option {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  min-width: 0;
+}
+
+.fx-package-option h4 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.fx-package-option > strong {
+  color: var(--accent-color, #d99100);
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.fx-package-option p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.fx-package-order {
+  display: block;
+  margin-top: auto;
+  padding: 11px 10px;
+  border-radius: 9px;
+  background: #168b4b;
+  color: #fff !important;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fx-package-order:hover {
+  background: #10743d;
+}
+
+@media (max-width: 700px) {
+  .fx-package-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================================
+   FX DIGITAL PACKAGE MODAL
+================================= */
+
+body.fx-modal-open {
+  overflow: hidden;
+}
+
+.fx-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(3, 7, 20, .82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.fx-modal-overlay[hidden] {
+  display: none;
+}
+
+.fx-package-modal {
+  position: relative;
+  width: min(900px, 100%);
+  max-height: 90%;
+  overflow-y: auto;
+  padding: 32px;
+  border: 1px solid rgba(255, 190, 70, .4);
+  border-radius: 22px;
+  background: #101a32;
+  color: #f5f7ff;
+  box-shadow: 0 25px 90px rgba(0, 0, 0, .6);
+  animation: fxModalEnter .22s ease-out;
+}
+
+@keyframes fxModalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fx-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.fx-modal-heading {
+  text-align: center;
+  margin-bottom: 28px;
+  padding: 0 35px;
+}
+
+.fx-modal-heading > span {
+  color: #ffc45b;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.fx-modal-heading h2 {
+  color: #fff;
+  font-size: clamp(23px, 4vw, 32px);
+  margin: 10px 0;
+}
+
+.fx-modal-heading p {
+  color: #bdc8dc;
+  font-size: 14px;
+}
+
+.fx-modal-packages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.fx-modal-package {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  padding: 24px 18px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 16px;
+  background: #192744;
+  color: #f5f7ff;
+  text-align: center;
+}
+
+.fx-modal-package.standard {
+  border: 2px solid #ffc45b;
+  background: #24304a;
+}
+
+.fx-modal-package h3 {
+  color: #fff;
+  font-size: 20px;
+  margin: 0 0 18px;
+}
+
+.fx-modal-package > strong {
+  display: block;
+  color: #ffc45b;
+  font-size: clamp(20px, 3vw, 26px);
+  overflow-wrap: anywhere;
+  margin-bottom: 15px;
+}
+
+.fx-modal-package p {
+  color: #c8d2e4;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 22px;
+}
+
+.fx-modal-package .fx-package-order {
+  margin-top: auto;
+  padding: 13px 10px;
+  border-radius: 10px;
+  background: #159653;
+  color: white !important;
+  font-weight: 800;
+  text-decoration: none;
+  text-align: center;
+}
+
+.fx-modal-package .fx-package-order:hover {
+  background: #0f7540;
+}
+
+@media (max-width: 650px) {
+  .fx-package-modal {
+    padding: 25px 17px;
+  }
+
+  .fx-modal-packages {
+    grid-template-columns: 1fr;
+  }
+
+  .fx-modal-package {
+    padding: 20px;
+  }
+}
+
+/* =================================
+   FIX POSISI TOMBOL PAKET DI BAWAH CARD
+================================= */
+
+article.card {
+  display: flex;
+  flex-direction: column;
+}
+
+article.card .fx-package-area {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+article.card .fx-package-toggle {
+  width: 100%;
+  min-height: 54px;
+  flex-shrink: 0;
+}
