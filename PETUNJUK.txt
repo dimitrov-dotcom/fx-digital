@@ -1,0 +1,22 @@
+FX DIGITAL - PATCH AUDIT LOKAL
+
+Isi patch:
+1. functions/api/invoice.js: endpoint invoice memakai POST JSON, bukan GET query token.
+2. assets/js/fx-invoice.js: mengambil token dari URL awal, langsung menghapus token dari address bar, lalu POST token ke API.
+3. invoice.html: menambahkan Referrer-Policy no-referrer.
+4. functions/api/admin/update-order.js: mencegah pembatalan pesanan berstatus Selesai atau pembayaran Lunas.
+5. migrations/0003_order_tracking_token.sql: migrasi tracking token yang tidak ikut ZIP audit awal.
+6. public/*: salinan halaman invoice dan JS yang sudah disinkronkan.
+
+CARA PAKAI AMAN:
+- Buat backup proyek sebelum menyalin patch.
+- Ekstrak isi ZIP ini ke folder ~/FX-Digital dengan mempertahankan struktur folder (merge/replace file).
+- Jangan jalankan migrasi production. Migrasi hanya perlu diterapkan ke database lokal yang belum memiliki kolom tracking_token_hash.
+- Jika migrasi 0003 sudah pernah diterapkan pada database lokal, JANGAN jalankan ulang.
+- Setelah menyalin, jalankan node --check pada tiga file JS terkait dan uji invoice lokal.
+- Belum ada perubahan production, Git push, atau deploy.
+
+CATATAN AUDIT YANG MASIH TERBUKA:
+- Login rate-limit masih bergantung pada IP dan perlu Cloudflare Rate Limiting untuk production.
+- Riwayat pembayaran belum mencatat setiap tahap DP/pelunasan sebagai event terpisah.
+- Perlu uji end-to-end dengan data uji terisolasi sebelum deploy.

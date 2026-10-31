@@ -1,0 +1,462 @@
+/* FX DIGITAL - NEON NAVBAR */
+
+.navlinks a[data-nav] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--muted);
+  background: transparent;
+  text-decoration: none;
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+/* Efek hover */
+.navlinks a[data-nav]:hover {
+  color: #ffffff !important;
+  background: rgba(112, 72, 255, 0.12) !important;
+  border-color: rgba(133, 111, 255, 0.75) !important;
+  box-shadow:
+    0 0 7px rgba(112, 72, 255, 0.32),
+    inset 0 0 8px rgba(112, 72, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Kotak neon halaman aktif */
+.navlinks a[data-nav].active {
+  color: #ffffff !important;
+  background: linear-gradient(
+    135deg,
+    rgba(104, 63, 255, 0.22),
+    rgba(0, 210, 255, 0.10)
+  ) !important;
+  border: 1px solid #9277ff !important;
+  box-shadow:
+    0 0 6px rgba(126, 91, 255, 0.65),
+    0 0 16px rgba(126, 91, 255, 0.28),
+    inset 0 0 9px rgba(0, 210, 255, 0.08);
+}
+
+/* Garis neon di bawah menu aktif */
+.navlinks a[data-nav].active::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #a78bfa, #67e8f9);
+  box-shadow: 0 0 8px rgba(103, 232, 249, 0.75);
+}
+
+/* Fokus keyboard */
+.navlinks a[data-nav]:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+
+/* Tampilan mobile */
+@media (max-width: 850px) {
+  .navlinks a[data-nav] {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    padding: 12px 14px;
+  }
+
+  .navlinks a[data-nav].active::after {
+    left: auto;
+    right: 12px;
+    bottom: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateY(50%);
+  }
+}
+
+/* Kurangi animasi jika diminta oleh sistem pengguna */
+@media (prefers-reduced-motion: reduce) {
+  .navlinks a[data-nav] {
+    transition: none;
+    transform: none;
+  }
+}
+
+
+/* FX NAVBAR MOVING INDICATOR */
+.navlinks {
+  position: relative;
+  isolation: isolate;
+}
+
+.navlinks .fx-nav-indicator {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(146, 119, 255, .95);
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(104, 63, 255, .24),
+    rgba(0, 210, 255, .13)
+  );
+  box-shadow:
+    0 0 8px rgba(126, 91, 255, .55),
+    0 0 20px rgba(126, 91, 255, .22),
+    inset 0 0 10px rgba(0, 210, 255, .10);
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    left 320ms cubic-bezier(.2, .8, .2, 1),
+    top 320ms cubic-bezier(.2, .8, .2, 1),
+    width 320ms cubic-bezier(.2, .8, .2, 1),
+    height 320ms cubic-bezier(.2, .8, .2, 1),
+    opacity 160ms ease;
+}
+
+.navlinks a[data-nav] {
+  z-index: 1;
+}
+
+.navlinks a[data-nav].active {
+  position: relative;
+  z-index: 1;
+  color: #fff !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.navlinks a[data-nav].active::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navlinks .fx-nav-indicator {
+    transition: none;
+  }
+}
+
+/* FX SHARED SERVICE CARDS */
+.fx-service-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.fx-service-item {
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(103, 232, 249, .14);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(17, 29, 52, .94), rgba(20, 25, 48, .88));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.fx-service-item:hover {
+  border-color: rgba(103, 232, 249, .42);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .18), 0 0 16px rgba(103, 232, 249, .07);
+  transform: translateY(-3px);
+}
+
+.fx-service-item > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 70px;
+  box-sizing: border-box;
+  padding: 22px 24px;
+  list-style: none;
+  cursor: pointer;
+  color: #f1f5ff;
+  font-weight: 700;
+}
+
+.fx-service-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.fx-service-icon {
+  flex: 0 0 auto;
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+
+.fx-service-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.45;
+}
+
+.fx-service-arrow {
+  flex: 0 0 auto;
+  color: #67e8f9;
+  transition: transform 200ms ease;
+}
+
+.fx-service-item[open] .fx-service-arrow {
+  transform: rotate(45deg);
+}
+
+.fx-service-content {
+  padding: 0 24px 24px;
+  color: #c4cede;
+  line-height: 1.75;
+}
+
+.fx-service-content p:first-child {
+  margin-top: 0;
+}
+
+.fx-service-content h4 {
+  color: #f1f5ff;
+}
+
+@media (max-width: 1000px) {
+  .fx-service-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .fx-service-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .fx-service-item {
+    border-radius: 18px;
+  }
+
+  .fx-service-item > summary {
+    padding: 18px;
+  }
+
+  .fx-service-content {
+    padding: 0 18px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-service-item,
+  .fx-service-arrow {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* =========================================
+   FX DIGITAL — PENYAMAAN KARTU LAYANAN
+   FX Web, FX Tech, FX Gaming
+   Mengikuti tema gelap FX Docs
+   ========================================= */
+
+.fx-service-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.fx-service-item {
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #334155 !important;
+  border-radius: 18px !important;
+  background: #172033 !important;
+  color: #cbd5e1 !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .18) !important;
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.fx-service-item > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 70px;
+  padding: 22px 23px;
+  box-sizing: border-box;
+  list-style: none;
+  cursor: pointer;
+  color: #f8fafc !important;
+  font-weight: 700;
+}
+
+.fx-service-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.fx-service-icon {
+  flex: 0 0 auto;
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+
+.fx-service-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: #f8fafc !important;
+  line-height: 1.45;
+}
+
+.fx-service-arrow {
+  flex: 0 0 auto;
+  color: #a78bfa !important;
+  transition: transform .2s ease;
+}
+
+.fx-service-item[open] .fx-service-arrow {
+  transform: rotate(45deg);
+}
+
+.fx-service-content {
+  padding: 0 23px 23px;
+  color: #cbd5e1 !important;
+  line-height: 1.75;
+}
+
+.fx-service-content p,
+.fx-service-content li {
+  color: #cbd5e1 !important;
+}
+
+.fx-service-content h4 {
+  color: #f8fafc !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fx-service-item:hover {
+    transform: translateY(-5px);
+    background: #202c42 !important;
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 16px 34px rgba(124, 58, 237, .16) !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .fx-service-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .fx-service-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .fx-service-item > summary {
+    padding: 18px;
+  }
+
+  .fx-service-content {
+    padding: 0 18px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-service-item,
+  .fx-service-arrow {
+    transition: none;
+  }
+
+  .fx-service-item:hover {
+    transform: none;
+  }
+}
+
+/* =========================================
+   FX DIGITAL — FINAL DARK SERVICE CARDS
+   FX Web, FX Tech, FX Gaming
+   ========================================= */
+
+.fx-service-list .fx-service-item {
+  background: #172033 !important;
+  color: #cbd5e1 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .22) !important;
+}
+
+.fx-service-list .fx-service-item > summary {
+  background: transparent !important;
+  color: #f8fafc !important;
+}
+
+.fx-service-list .fx-service-item .fx-service-icon {
+  display: inline-grid !important;
+  color: #a78bfa !important;
+}
+
+.fx-service-list .fx-service-item .fx-service-title {
+  color: #f8fafc !important;
+}
+
+.fx-service-list .fx-service-item .fx-service-arrow {
+  color: #a78bfa !important;
+  background: transparent !important;
+}
+
+.fx-service-list .fx-service-item .fx-service-content {
+  background: transparent !important;
+  color: #cbd5e1 !important;
+}
+
+.fx-service-list .fx-service-item .fx-service-content p,
+.fx-service-list .fx-service-item .fx-service-content li {
+  color: #cbd5e1 !important;
+}
+
+.fx-service-list .fx-service-item .fx-service-content h4 {
+  color: #f8fafc !important;
+}
+
+.fx-service-list .fx-service-item > summary:hover {
+  background: rgba(167, 139, 250, .08) !important;
+}
+
+.fx-service-list .fx-service-item[open] {
+  border-color: #8b5cf6 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fx-service-list .fx-service-item:hover {
+    background: #202c42 !important;
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 16px 34px rgba(124, 58, 237, .18) !important;
+    transform: translateY(-5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-service-list .fx-service-item,
+  .fx-service-list .fx-service-item * {
+    transition: none !important;
+  }
+
+  .fx-service-list .fx-service-item:hover {
+    transform: none;
+  }
+}

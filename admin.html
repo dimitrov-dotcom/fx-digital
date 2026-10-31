@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel Admin - FX Digital</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/fx-enhancements.css">
+</head>
+<body>
+
+<main class="fx-admin">
+  <div class="fx-admin-header">
+    <div>
+      <span class="eyebrow">FX DIGITAL MANAGEMENT</span>
+      <h1>Panel Admin</h1>
+      <p>Kelola pesanan dan perkembangan pekerjaan pelanggan.</p>
+    </div>
+    <a href="index.html" class="fx-admin-back">← Kembali ke Website</a>
+  </div>
+
+  <section id="fx-admin-login" class="fx-admin-login" hidden>
+    <div class="fx-admin-login-card">
+      <span class="eyebrow">ADMIN AUTHENTICATION</span>
+      <h2>Masuk ke Panel Admin</h2>
+      <p>Silakan masukkan password administrator.</p>
+
+      <form id="fx-admin-login-form">
+        <label for="fx-admin-password">Password Admin</label>
+        <input
+          type="password"
+          id="fx-admin-password"
+          autocomplete="current-password"
+          required
+          maxlength="256"
+          placeholder="Masukkan password admin"
+        >
+        <button type="submit" id="fx-admin-login-button">Masuk</button>
+        <p id="fx-admin-login-feedback" class="fx-admin-feedback" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="fx-admin-dashboard" hidden>
+    <div class="fx-admin-notice">
+      <strong>Database D1 Terhubung</strong>
+      <p>Data pesanan dimuat dari database FX Digital. Perubahan akan tersimpan di server.</p>
+    </div>
+
+    <section class="fx-admin-stats">
+      <article><span>Total Pesanan</span><strong id="stat-total">0</strong></article>
+      <article><span>Menunggu Persetujuan</span><strong id="stat-waiting">0</strong></article>
+      <article><span>Sedang Dikerjakan</span><strong id="stat-working">0</strong></article>
+      <article><span>Selesai</span><strong id="stat-done">0</strong></article>
+    </section>
+
+    <section class="fx-admin-orders">
+      <div class="fx-admin-toolbar">
+        <div>
+          <h2>Daftar Pesanan</h2>
+          <p>Periksa dan perbarui status setiap pesanan.</p>
+        </div>
+        <div class="fx-admin-actions">
+          <button type="button" id="fx-admin-refresh">↻ Muat Ulang</button>
+          <button type="button" id="fx-admin-logout">Keluar</button>
+        </div>
+      </div>
+
+      <input
+        type="search"
+        id="fx-admin-search"
+        placeholder="Cari kode, nama, WhatsApp, atau layanan..."
+        aria-label="Cari pesanan"
+      >
+
+      <div id="fx-admin-list" aria-live="polite"></div>
+    </section>
+  </section>
+
+  <p id="fx-admin-global-feedback" class="fx-admin-global-feedback" role="status" aria-live="polite"></p>
+</main>
+
+<script src="assets/js/fx-admin.js"></script>
+</body>
+</html>

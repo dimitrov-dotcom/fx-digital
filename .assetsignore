@@ -1,0 +1,18 @@
+# File konfigurasi dan dokumentasi internal
+/.gitignore
+/.assetsignore
+/wrangler.jsonc
+/README.md
+/migrations/
+
+# Cache dan data lokal
+/.wrangler/
+/.dev.vars
+/.dev.vars.*
+
+# Folder dan file backup
+/backup-*/
+/backups-*/
+/.backup-*/
+/*.backup
+/*.backup-*

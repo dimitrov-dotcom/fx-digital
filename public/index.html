@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beranda | FX Digital</title>
+<meta name="description" content="FX Digital menyediakan layanan website, bantuan teknologi komputer, gaming, dan pembuatan dokumen digital.">
+<link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/fx-enhancements.css">
+<link rel="stylesheet" href="assets/css/fx-modern.css">
+  <link rel="canonical" href="https://fx-digital.pages.dev/">
+  <link rel="stylesheet" href="assets/css/fx-3d.css">
+  <link rel="stylesheet" href="assets/css/fx-cinematic.css">
+  <link rel="stylesheet" href="assets/css/fx-future.css">
+  <link rel="stylesheet" href="assets/css/fx-brand-motion.css">
+  <link rel="stylesheet" href="assets/css/fx-navbar-neon.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html">FX <span>Digital</span></a>
+    <button class="menu-toggle" type="button">☰ Menu</button>
+    <nav class="navlinks"><a href="index.html" data-nav="index.html">Beranda</a>
+<a href="fx-web.html" data-nav="fx-web.html">FX Web</a>
+<a href="fx-docs.html" data-nav="fx-docs.html">FX Docs</a>
+<a href="fx-tech.html" data-nav="fx-tech.html">FX Tech</a>
+<a href="fx-gaming.html" data-nav="fx-gaming.html">FX Gaming</a>
+<a href="kontak.html" data-nav="kontak.html">Kontak</a></nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">SOLUSI DIGITAL, TANPA RIBET</span>
+        <h1>Satu tempat untuk kebutuhan digitalmu.</h1>
+        <p class="lead">Butuh bantuan website, dokumen digital, komputer, atau gaming? Temukan solusi yang sesuai bersama FX Digital. Ceritakan kebutuhanmu dan diskusikan biaya sebelum pengerjaan dimulai.</p>
+        <div class="actions">
+          <a class="btn btn-primary" data-wa data-message="Halo FX Digital, saya ingin konsultasi layanan Beranda.">Yuk, Konsultasi via WhatsApp ↗</a>
+          <a class="btn btn-secondary" href="kontak.html">Kontak</a>
+        </div>
+        <p class="small muted" data-service-area></p>
+      </div>
+      <aside class="hero-card fx-hero-art">
+        <img src="assets/images/fx-hero/beranda.jpg" alt="FX Digital — ilustrasi layanan digital" loading="eager">
+      </aside>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="section-head"><h2>Temukan Solusi yang Kamu Butuhkan ✨</h2><p>Pilih layanan yang paling pas, ceritakan kebutuhanmu, lalu diskusikan penawaran sebelum mulai.</p></div>
+
+        <div class="grid">
+          <article class="card"><div class="icon">✦</div><h3>Layanan sesuai kebutuhan</h3><p>Diskusikan ruang lingkup dan hasil yang diharapkan sebelum pengerjaan.</p></article>
+          <article class="card"><div class="icon">✓</div><h3>Komunikasi jelas</h3><p>Jelaskan kebutuhan, tenggat waktu, serta bahan yang sudah tersedia.</p></article>
+          <article class="card"><div class="icon">↗</div><h3>Mulai dari Konsultasi 💬</h3><p>Masih bingung memilih layanan? Tanyakan kebutuhan dan estimasi biayanya sebelum memulai.</p></article>
+        </div>
+
+    </div>
+  </section>
+
+
+  <section id="kalkulator-harga">
+    <div class="container">
+      <div class="section-head">
+        <h2>Kalkulator & Pemesanan FX Digital 💎</h2>
+        <p>Pilih layanan, isi identitas, dan lihat estimasi biaya dalam satu tempat.</p>
+      </div>
+
+      <form class="fx-calculator fx-order-form" id="fx-order-form">
+        <div class="fx-calculator-grid fx-order-grid">
+          <div>
+            <label for="fx-order-name">Nama lengkap</label>
+            <input id="fx-order-name" type="text" required maxlength="100"
+                   placeholder="Masukkan nama kamu">
+          </div>
+
+          <div>
+            <label for="fx-order-whatsapp">Nomor WhatsApp</label>
+            <input id="fx-order-whatsapp" type="tel" required maxlength="25"
+                   placeholder="Contoh: 081234567890">
+          </div>
+
+          <div>
+            <label for="fx-calc-category">Kategori layanan</label>
+            <select id="fx-calc-category">
+              <option>FX Web</option>
+              <option>FX Docs</option>
+              <option>FX Tech</option>
+              <option>FX Gaming</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="fx-calc-service">Jenis layanan</label>
+            <select id="fx-calc-service"></select>
+          </div>
+
+          <div>
+            <label for="fx-calc-package">Pilih paket</label>
+            <select id="fx-calc-package">
+              <option>Basic</option>
+              <option>Standard</option>
+              <option>Premium</option>
+            </select>
+          </div>
+
+          <div id="fx-calc-quantity-field" hidden>
+            <label id="fx-calc-quantity-label" for="fx-calc-quantity">Jumlah</label>
+            <input id="fx-calc-quantity" type="number"
+                   min="1" max="1000" value="1">
+          </div>
+
+          <div class="fx-order-full">
+            <label for="fx-order-notes">Catatan kebutuhan</label>
+            <textarea id="fx-order-notes"
+                      placeholder="Jelaskan kebutuhan atau detail pesananmu..."></textarea>
+          </div>
+        </div>
+
+        <div class="fx-calculator-summary">
+          <p><span>Harga dasar</span><strong id="fx-calc-base">-</strong></p>
+          <p><span>Harga paket per unit</span><strong id="fx-calc-package-price">-</strong></p>
+          <hr>
+          <div>Estimasi total</div>
+          <div class="fx-calculator-total" id="fx-calc-result">-</div>
+
+          <button class="fx-order-submit" id="fx-calc-order" type="submit">
+            Kirim Pesanan via WhatsApp ↗
+          </button>
+        </div>
+
+        <p class="muted" style="font-size:13px;margin-top:18px">
+          Harga merupakan estimasi awal. Harga final, ruang lingkup, dan waktu
+          pengerjaan akan dikonfirmasi sebelum pekerjaan dimulai.
+        </p>
+      </form>
+    </div>
+  </section>
+
+
+
+
+
+
+  <section class="section" id="fx-order-tracker">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">ORDER TRACKING</span>
+        <h2>Lacak Status Pesanan</h2>
+        <p class="muted">
+          Buka tautan tracking pribadi yang dikirim melalui WhatsApp setelah pemesanan.
+        </p>
+      </div>
+
+      <div id="fx-track-result" class="fx-order-form" aria-live="polite">
+        <p>Detail pesanan hanya dapat dibuka melalui tautan tracking pribadi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container cta">
+      <div><h2>Yuk, Mulai dari Sini! 🚀</h2><p class="muted">Punya ide atau pertanyaan? Yuk, bahas bareng FX Digital!</p></div>
+      <a class="btn btn-primary" data-wa data-message="Halo FX Digital, saya ingin bertanya tentang Beranda.">Hubungi FX Digital ↗</a>
+    </div>
+  </section>
+
+  <div class="fx-price-note" style="margin:24px 0;padding:14px 16px;font-size:13px;line-height:1.8;color:#a7a7b5;border-left:3px solid #777;border-radius:4px;">
+    <strong>Catatan Harga:</strong>
+    Harga layanan merupakan estimasi dan dapat berubah sesuai kebutuhan,
+    tingkat kesulitan, spesifikasi, serta ruang lingkup pekerjaan.
+    Biaya tambahan seperti domain, hosting, lisensi, atau layanan pihak
+    ketiga akan dikonfirmasi secara terpisah apabila diperlukan.
+    Harga final dan waktu pengerjaan disepakati sebelum pekerjaan dimulai.
+  </div>
+
+</main>
+<footer class="footer"><div class="container">© <span data-year></span> FX Digital · Layanan online</div></footer>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/fx-price-calculator.js" defer></script>
+
+<script src="assets/js/main.js"></script>
+  <script src="assets/js/fx-enhancements.js" defer></script>
+<script src="assets/js/fx-modern.js" defer></script>
+  <script src="assets/js/fx-3d.js" defer></script>
+  <script src="assets/js/fx-cinematic.js" defer></script>
+  <script src="assets/js/fx-future.js" defer></script>
+  <script src="assets/js/fx-brand-motion.js" defer></script>
+  <script src="assets/js/fx-navbar-active.js" defer></script>
+</body>
+</html>

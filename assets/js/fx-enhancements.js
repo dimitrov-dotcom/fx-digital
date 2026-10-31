@@ -302,7 +302,7 @@ link.setAttribute("title", "Chat melalui WhatsApp");
   function init() {
     addSEO();
     addFAQ();
-    addOrderDialog();
+    // Dialog pemesanan lama dinonaktifkan; gunakan formulir utama berbasis D1.
     addFloatingWhatsApp();
     addOrderButtons();
     addFooterNote();

@@ -1,0 +1,253 @@
+/* FX DIGITAL — ULTRA FUTURISTIC 3D */
+
+:root {
+  --fx3d-cyan: #22d3ee;
+  --fx3d-blue: #60a5fa;
+  --fx3d-purple: #a855f7;
+}
+
+html {
+  background: #080b18;
+}
+
+body {
+  background-color: transparent !important;
+}
+
+/* Ambient neon atmosphere */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 12% 22%, rgba(124,58,237,.16), transparent 42%),
+    radial-gradient(ellipse at 88% 35%, rgba(34,211,238,.12), transparent 40%),
+    radial-gradient(ellipse at 52% 95%, rgba(96,165,250,.10), transparent 45%);
+  background-size: 140% 140%;
+  animation: fx3d-atmosphere 18s ease-in-out infinite alternate;
+}
+
+@keyframes fx3d-atmosphere {
+  from { background-position: 0% 0%; }
+  to { background-position: 100% 100%; }
+}
+
+/* Subtle futuristic grid */
+.fx3d-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .13;
+  background-image:
+    linear-gradient(rgba(96,165,250,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96,165,250,.14) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+/* 3D card stage */
+.fx3d-card {
+  position: relative;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transition:
+    transform .22s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
+  will-change: transform;
+}
+
+.fx3d-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(
+    circle at var(--fx3d-x, 50%) var(--fx3d-y, 50%),
+    rgba(34,211,238,.22),
+    rgba(168,85,247,.08) 35%,
+    transparent 72%
+  );
+  transition: opacity .25s ease;
+}
+
+.fx3d-card:hover::before {
+  opacity: 1;
+}
+
+.fx3d-card:hover {
+  border-color: rgba(96,165,250,.65) !important;
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.25),
+    0 0 24px rgba(96,165,250,.12);
+}
+
+/* Moving light sweep */
+.fx3d-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255,255,255,.09) 45%,
+    rgba(34,211,238,.12) 50%,
+    transparent 72%
+  );
+  background-size: 230% 100%;
+  background-position: 130% 0;
+  transition: background-position .65s ease;
+}
+
+.fx3d-card:hover::after {
+  background-position: -30% 0;
+}
+
+/* Glowing buttons */
+.btn,
+.btn-primary,
+.btn-secondary,
+.fx-order-button,
+button.primary {
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .fx-order-button:hover,
+  button.primary:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.12);
+    box-shadow:
+      0 8px 28px rgba(96,165,250,.18),
+      0 0 18px rgba(168,85,247,.12);
+  }
+}
+
+/* Hero depth */
+.hero-card {
+  transform-style: preserve-3d;
+}
+
+.hero-card .orb {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 35px rgba(34,211,238,.12),
+    0 0 32px rgba(96,165,250,.10);
+}
+
+.hero-card .orb::after {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -25%;
+  left: -25%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(34,211,238,.20),
+    transparent 30%,
+    rgba(168,85,247,.18),
+    transparent 65%
+  );
+  animation: fx3d-orb-spin 12s linear infinite;
+}
+
+@keyframes fx3d-orb-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Scroll reveal */
+.fx3d-reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(.985);
+  transition:
+    opacity .65s ease,
+    transform .65s cubic-bezier(.2,.7,.2,1);
+}
+
+.fx3d-reveal.fx3d-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.fx3d-reveal:nth-child(3n + 2) {
+  transition-delay: 70ms;
+}
+
+.fx3d-reveal:nth-child(3n) {
+  transition-delay: 130ms;
+}
+
+/* Floating particles stay behind page content */
+#fx3d-particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .72;
+}
+
+/* Mobile performance */
+@media (max-width: 700px) {
+  .fx3d-grid {
+    background-size: 34px 34px;
+    opacity: .08;
+  }
+
+  .fx3d-card {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .fx3d-card::after {
+    display: none;
+  }
+
+  #fx3d-particles {
+    opacity: .38;
+  }
+
+  .fx3d-reveal {
+    transform: translateY(14px);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  .fx3d-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  #fx3d-particles {
+    display: none;
+  }
+}

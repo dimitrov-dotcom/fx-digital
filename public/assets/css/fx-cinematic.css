@@ -1,0 +1,167 @@
+/* FX DIGITAL — CINEMATIC HOLOGRAM */
+
+.fx3d-planet {
+  position: relative;
+  width: clamp(150px, 24vw, 270px);
+  aspect-ratio: 1;
+  margin: 24px auto;
+  border-radius: 50%;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 32% 27%, rgba(255,255,255,.95), transparent 4%),
+    radial-gradient(circle at 35% 30%, #67e8f9 0%, #2563eb 22%, #312e81 48%, #090b24 72%);
+  box-shadow:
+    inset -24px -18px 45px rgba(0,0,0,.75),
+    inset 10px 8px 25px rgba(103,232,249,.45),
+    0 0 24px rgba(34,211,238,.35),
+    0 0 65px rgba(99,102,241,.22);
+  animation: fxPlanetFloat 5s ease-in-out infinite;
+}
+
+.fx3d-planet::before,
+.fx3d-planet::after {
+  content: "";
+  position: absolute;
+  inset: -13%;
+  border: 1px solid rgba(103,232,249,.65);
+  border-radius: 50%;
+  transform: rotateX(68deg) rotateZ(-22deg);
+  box-shadow: 0 0 14px rgba(34,211,238,.15);
+  pointer-events: none;
+}
+
+.fx3d-planet::after {
+  inset: -23% -8%;
+  border-color: rgba(168,85,247,.7);
+  transform: rotateX(72deg) rotateZ(35deg);
+  animation: fxPlanetOrbit 12s linear infinite;
+}
+
+.fx3d-planet-halo {
+  position: absolute;
+  inset: -35%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,.2), transparent 68%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+@keyframes fxPlanetFloat {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+
+@keyframes fxPlanetOrbit {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
+}
+
+/* Cinematic intro */
+#fx-cinematic-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at center, rgba(30,41,99,.5), transparent 55%),
+    #070914;
+  color: #fff;
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .8s ease, visibility .8s ease;
+}
+
+#fx-cinematic-intro.fx-intro-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fx-intro-content {
+  width: min(100%, 560px);
+  animation: fxIntroRise 1s cubic-bezier(.2,.7,.2,1) both;
+}
+
+.fx-intro-mark {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(103,232,249,.8);
+  border-radius: 22px;
+  color: #67e8f9;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  background: linear-gradient(145deg, rgba(34,211,238,.16), rgba(168,85,247,.15));
+  box-shadow: 0 0 38px rgba(34,211,238,.2), inset 0 0 24px rgba(168,85,247,.12);
+}
+
+.fx-intro-title {
+  margin: 0;
+  font-size: clamp(28px, 7vw, 52px);
+  font-weight: 900;
+  letter-spacing: .08em;
+  line-height: 1.15;
+  background: linear-gradient(100deg, #fff, #67e8f9 45%, #c4b5fd);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.fx-intro-subtitle {
+  margin: 16px 0 26px;
+  color: #a5b4fc;
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.fx-intro-line {
+  width: min(230px, 70%);
+  height: 2px;
+  margin: auto;
+  overflow: hidden;
+  background: rgba(148,163,184,.2);
+}
+
+.fx-intro-line::after {
+  content: "";
+  display: block;
+  width: 45%;
+  height: 100%;
+  background: #67e8f9;
+  box-shadow: 0 0 14px #22d3ee;
+  animation: fxIntroLoading 1.4s ease-in-out infinite;
+}
+
+@keyframes fxIntroRise {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fxIntroLoading {
+  from { transform: translateX(-110%); }
+  to { transform: translateX(250%); }
+}
+
+@media (max-width: 700px) {
+  .fx3d-planet { width: 155px; }
+  .fx3d-planet::after { inset: -18% -6%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx3d-planet,
+  .fx3d-planet::after,
+  .fx-intro-content,
+  .fx-intro-line::after {
+    animation: none !important;
+  }
+
+  #fx-cinematic-intro { transition: none !important; }
+}

@@ -1,0 +1,195 @@
+/* FX DIGITAL — FUTURE MODE */
+
+.fx-future-glass {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(103,232,249,.18) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(15,23,42,.78),
+    rgba(30,41,75,.38)
+  ) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 12px 35px rgba(0,0,0,.12);
+  transition:
+    border-color .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.fx-future-glass::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(103,232,249,.10) 45%,
+    rgba(168,85,247,.12) 50%,
+    transparent 75%
+  );
+  transform: translateX(-120%);
+  transition: transform .8s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fx-future-glass:hover {
+    border-color: rgba(103,232,249,.55) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.10),
+      0 16px 42px rgba(0,0,0,.22),
+      0 0 25px rgba(34,211,238,.10);
+  }
+
+  .fx-future-glass:hover::after {
+    transform: translateX(120%);
+  }
+}
+
+/* Page transition portal */
+#fx-future-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 100001;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #070914;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .28s ease, visibility .28s ease;
+}
+
+#fx-future-portal.fx-portal-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fx-portal-ring {
+  width: min(48vw, 240px);
+  aspect-ratio: 1;
+  border: 2px solid rgba(103,232,249,.9);
+  border-radius: 50%;
+  box-shadow:
+    0 0 20px rgba(34,211,238,.4),
+    inset 0 0 24px rgba(168,85,247,.25);
+  animation: fxPortalExpand .45s ease-out forwards;
+}
+
+.fx-portal-ring::before,
+.fx-portal-ring::after {
+  content: "";
+  position: absolute;
+  width: inherit;
+  aspect-ratio: 1;
+  border: 1px solid rgba(168,85,247,.65);
+  border-radius: 50%;
+  animation: fxPortalSpin 1.2s linear infinite;
+}
+
+.fx-portal-ring::after {
+  border-color: rgba(96,165,250,.65);
+  animation-direction: reverse;
+}
+
+@keyframes fxPortalExpand {
+  from { transform: scale(.25) rotate(-35deg); opacity: .3; }
+  to { transform: scale(1.2) rotate(0); opacity: 1; }
+}
+
+@keyframes fxPortalSpin {
+  to { rotate: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-future-glass,
+  .fx-future-glass::after {
+    transition: none !important;
+  }
+
+  #fx-future-portal {
+    transition: none !important;
+  }
+
+  .fx-portal-ring,
+  .fx-portal-ring::before,
+  .fx-portal-ring::after {
+    animation: none !important;
+  }
+}
+
+
+/* FX FUTURE SCROLL UPGRADE */
+#fx-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100010;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #22d3ee, #818cf8, #c084fc);
+  box-shadow: 0 0 12px rgba(34, 211, 238, .55);
+  pointer-events: none;
+}
+
+#fx-back-to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 100000;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(103, 232, 249, .45);
+  border-radius: 15px;
+  background: rgba(15, 23, 42, .88);
+  color: #a5f3fc;
+  font: inherit;
+  font-size: 23px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease,
+              visibility .25s ease, border-color .25s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#fx-back-to-top.fx-top-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#fx-back-to-top:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  #fx-back-to-top:hover {
+    border-color: #67e8f9;
+    color: white;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #fx-back-to-top {
+    transition: none;
+  }
+}
+
+
+/* Tombol kembali ke atas dinonaktifkan agar tidak menutupi WhatsApp */
+#fx-back-to-top {
+  display: none !important;
+}

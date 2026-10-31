@@ -1,0 +1,30 @@
+# Cloudflare Wrangler lokal
+.wrangler/
+
+# Environment dan secret lokal
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+
+# Dependensi dan hasil build
+node_modules/
+dist/
+
+# Backup direktori
+backup-*/
+backups-*/
+.backup-*/
+
+# Backup file
+*.backup
+*.backup-*
+*.backup_*
+*.backup_*
+
+# Arsip HTML cadangan
+*-backup-*.html
+
+# Wrangler build artifact
+/_worker.bundle

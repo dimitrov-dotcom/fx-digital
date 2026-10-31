@@ -1223,7 +1223,7 @@ body::after {
   ) !important;
   transform-origin: right center !important;
   animation: fxMeteorSlimFlight var(--flight, 1.8s) linear 1 !important;
-  
+
 }
 
 #fx-cosmos-scene .fx-space-meteor::before,

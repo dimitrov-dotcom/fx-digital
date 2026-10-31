@@ -1338,35 +1338,3 @@ textarea {
     display: none !important;
   }
 }
-
-
-/* ==================================================
-   FX TECH & FX GAMING — TOMBOL KARTU SEJAJAR
-   ================================================== */
-
-/* Kartu layanan terbuka menggunakan tata letak kolom */
-.fx-service-list .fx-service-item[open] {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Konten kartu memenuhi tinggi yang tersedia */
-.fx-service-list .fx-service-item[open] > .fx-service-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 100%;
-}
-
-/* Tombol konsultasi selalu berada di bagian bawah */
-.fx-service-list .fx-service-item[open] .fx-service-content > a.btn[data-wa] {
-  margin-top: auto;
-  align-self: flex-start;
-}
-
-/* Pastikan isi kartu tidak terpotong */
-.fx-service-list .fx-service-item[open] .fx-service-content > p,
-.fx-service-list .fx-service-item[open] .fx-service-content > h4,
-.fx-service-list .fx-service-item[open] .fx-service-content > ul {
-  flex-shrink: 0;
-}

@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fx-digital",
+  "compatibility_date": "2026-10-30",
+  "pages_build_output_dir": "./public",
+  "d1_databases": [
+    {
+      "binding": "fx_digital_db",
+      "database_name": "fx-digital-db",
+      "database_id": "e6e52a6a-729e-4d87-afd4-c35df9eebe91",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

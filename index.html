@@ -49,15 +49,116 @@
   <section>
     <div class="container">
       <div class="section-head"><h2>Temukan Solusi yang Kamu Butuhkan ✨</h2><p>Pilih layanan yang paling pas, ceritakan kebutuhanmu, lalu diskusikan penawaran sebelum mulai.</p></div>
-      
+
         <div class="grid">
           <article class="card"><div class="icon">✦</div><h3>Layanan sesuai kebutuhan</h3><p>Diskusikan ruang lingkup dan hasil yang diharapkan sebelum pengerjaan.</p></article>
           <article class="card"><div class="icon">✓</div><h3>Komunikasi jelas</h3><p>Jelaskan kebutuhan, tenggat waktu, serta bahan yang sudah tersedia.</p></article>
           <article class="card"><div class="icon">↗</div><h3>Mulai dari Konsultasi 💬</h3><p>Masih bingung memilih layanan? Tanyakan kebutuhan dan estimasi biayanya sebelum memulai.</p></article>
         </div>
-        
+
     </div>
   </section>
+
+
+  <section id="kalkulator-harga">
+    <div class="container">
+      <div class="section-head">
+        <h2>Kalkulator & Pemesanan FX Digital 💎</h2>
+        <p>Pilih layanan, isi identitas, dan lihat estimasi biaya dalam satu tempat.</p>
+      </div>
+
+      <form class="fx-calculator fx-order-form" id="fx-order-form">
+        <div class="fx-calculator-grid fx-order-grid">
+          <div>
+            <label for="fx-order-name">Nama lengkap</label>
+            <input id="fx-order-name" type="text" required maxlength="100"
+                   placeholder="Masukkan nama kamu">
+          </div>
+
+          <div>
+            <label for="fx-order-whatsapp">Nomor WhatsApp</label>
+            <input id="fx-order-whatsapp" type="tel" required maxlength="25"
+                   placeholder="Contoh: 081234567890">
+          </div>
+
+          <div>
+            <label for="fx-calc-category">Kategori layanan</label>
+            <select id="fx-calc-category">
+              <option>FX Web</option>
+              <option>FX Docs</option>
+              <option>FX Tech</option>
+              <option>FX Gaming</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="fx-calc-service">Jenis layanan</label>
+            <select id="fx-calc-service"></select>
+          </div>
+
+          <div>
+            <label for="fx-calc-package">Pilih paket</label>
+            <select id="fx-calc-package">
+              <option>Basic</option>
+              <option>Standard</option>
+              <option>Premium</option>
+            </select>
+          </div>
+
+          <div id="fx-calc-quantity-field" hidden>
+            <label id="fx-calc-quantity-label" for="fx-calc-quantity">Jumlah</label>
+            <input id="fx-calc-quantity" type="number"
+                   min="1" max="1000" value="1">
+          </div>
+
+          <div class="fx-order-full">
+            <label for="fx-order-notes">Catatan kebutuhan</label>
+            <textarea id="fx-order-notes"
+                      placeholder="Jelaskan kebutuhan atau detail pesananmu..."></textarea>
+          </div>
+        </div>
+
+        <div class="fx-calculator-summary">
+          <p><span>Harga dasar</span><strong id="fx-calc-base">-</strong></p>
+          <p><span>Harga paket per unit</span><strong id="fx-calc-package-price">-</strong></p>
+          <hr>
+          <div>Estimasi total</div>
+          <div class="fx-calculator-total" id="fx-calc-result">-</div>
+
+          <button class="fx-order-submit" id="fx-calc-order" type="submit">
+            Kirim Pesanan via WhatsApp ↗
+          </button>
+        </div>
+
+        <p class="muted" style="font-size:13px;margin-top:18px">
+          Harga merupakan estimasi awal. Harga final, ruang lingkup, dan waktu
+          pengerjaan akan dikonfirmasi sebelum pekerjaan dimulai.
+        </p>
+      </form>
+    </div>
+  </section>
+
+
+
+
+
+
+  <section class="section" id="fx-order-tracker">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">ORDER TRACKING</span>
+        <h2>Lacak Status Pesanan</h2>
+        <p class="muted">
+          Buka tautan tracking pribadi yang dikirim melalui WhatsApp setelah pemesanan.
+        </p>
+      </div>
+
+      <div id="fx-track-result" class="fx-order-form" aria-live="polite">
+        <p>Detail pesanan hanya dapat dibuka melalui tautan tracking pribadi.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="band">
     <div class="container cta">
       <div><h2>Yuk, Mulai dari Sini! 🚀</h2><p class="muted">Punya ide atau pertanyaan? Yuk, bahas bareng FX Digital!</p></div>
@@ -77,6 +178,8 @@
 </main>
 <footer class="footer"><div class="container">© <span data-year></span> FX Digital · Layanan online</div></footer>
 <script src="assets/js/config.js"></script>
+<script src="assets/js/fx-price-calculator.js" defer></script>
+
 <script src="assets/js/main.js"></script>
   <script src="assets/js/fx-enhancements.js" defer></script>
 <script src="assets/js/fx-modern.js" defer></script>
